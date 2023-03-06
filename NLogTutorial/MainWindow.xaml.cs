@@ -16,11 +16,12 @@ namespace NLogTutorial
             InitializeComponent();
         }
 
-        private void Log_Output(object sender, RoutedEventArgs e)
+        private async void Log_Output(object sender, RoutedEventArgs e)
         {
-            _isLogStop = true;
-
-            StartLoopInfoLog();
+            await Task.Run(() =>
+            {
+                StartLoopInfoLog();
+            });
         }
 
         private void Log_Exception(object sender, RoutedEventArgs e)
@@ -39,6 +40,8 @@ namespace NLogTutorial
 
         private async void StartLoopInfoLog()
         {
+            _isLogStop = true;
+
             while (_isLogStop)
             {
                 _logger.Info("Infoを一回出力します");
@@ -52,6 +55,8 @@ namespace NLogTutorial
 
         private async void StartLoopErrorLog()
         {
+            _isLogStop = true;
+
             while (_isLogStop)
             {
                 _logger.Info("Infoを一回出力します");
