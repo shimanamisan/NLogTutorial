@@ -19,42 +19,22 @@
                     Width="110"
                     Height="40"
                     Margin="8"
-                    Click="Log_Output"
+                    Click="LogOutput"
                     Content="ログ出力ループ開始" />
                 <Button
                     Width="110"
                     Height="40"
                     Margin="8"
-                    Click="Log_Exception"
-                    Content="エラー出力ループ開始" />
+                    Click="LogExceptionOutput"
+                    Content="エラーログ出力" />
                 <Button
                     Width="110"
                     Height="40"
                     Margin="8"
-                    Click="Log_Rotation"
+                    Click="LogRotationStop"
                     Content="ループ処理を停止" />
             </StackPanel>
 
-            <StackPanel
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Horizontal">
-                <Button
-                    Width="110"
-                    Height="40"
-                    Margin="8"
-                    Content="Button" />
-                <Button
-                    Width="110"
-                    Height="40"
-                    Margin="8"
-                    Content="Button" />
-                <Button
-                    Width="110"
-                    Height="40"
-                    Margin="8"
-                    Content="Button" />
-            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using NLog;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -16,7 +17,7 @@ namespace NLogTutorial
             InitializeComponent();
         }
 
-        private async void Log_Output(object sender, RoutedEventArgs e)
+        private async void LogOutput(object sender, RoutedEventArgs e)
         {
             await Task.Run(() =>
             {
@@ -24,14 +25,26 @@ namespace NLogTutorial
             });
         }
 
-        private void Log_Exception(object sender, RoutedEventArgs e)
+        private void LogExceptionOutput(object sender, RoutedEventArgs e)
         {
-            _isLogStop = true;
+            try
+            {
+                var num = 0;
+                // 0による除算で例外を発生させる
+                var sum = 1 / num;
+            }
+            catch (Exception ex)
+            {
+                // 以下はerrorフォルダに出力される
+                _logger.Warn("Warnを一回出力します: {0}", ex.Message);
+                _logger.Error("Errorを一回出力します: {0}", ex.Message);
+                _logger.Fatal("Fatalを一回出力します: {0}", ex.Message);
 
-            StartLoopErrorLog();
+                MessageBox.Show("エラーが発生しました。");
+            }
         }
 
-        private void Log_Rotation(object sender, RoutedEventArgs e)
+        private void LogRotationStop(object sender, RoutedEventArgs e)
         {
             _isLogStop = false;
 
@@ -44,22 +57,11 @@ namespace NLogTutorial
 
             while (_isLogStop)
             {
+                // 以下はinfoフォルダに出力される
+                _logger.Debug("Debugを一回出力します");
                 _logger.Info("Infoを一回出力します");
-                _logger.Warn("Warnを一回出力します");
-                _logger.Error("Errorを一回出力します");
-                _logger.Fatal("Fatalを一回出力します");
 
-                await Task.Delay(0);
-            }
-        }
-
-        private async void StartLoopErrorLog()
-        {
-            _isLogStop = true;
-
-            while (_isLogStop)
-            {
-                _logger.Info("Infoを一回出力します");
+                // 以下はerrorフォルダに出力される
                 _logger.Warn("Warnを一回出力します");
                 _logger.Error("Errorを一回出力します");
                 _logger.Fatal("Fatalを一回出力します");
