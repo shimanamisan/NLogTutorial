@@ -58,6 +58,7 @@ namespace NLogTutorial
             while (_isLogStop)
             {
                 // 以下はinfoフォルダに出力される
+                _logger.Trace("Traceを一回出力します");
                 _logger.Debug("Debugを一回出力します");
                 _logger.Info("Infoを一回出力します");
 
